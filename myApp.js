@@ -16,8 +16,19 @@ let personSchema = new mongoose.Schema({
 //create a Personal model using the personSchema protoype 
 let Person = mongoose.model('Person', personSchema)
 
+
+//set up the create part of our CRUD. A new person is created using the model if the save method is ran with a callback which returns an err if there is one or returns the data. The mongoose documentation has now moved to an async await model rather than what FCC require for this exercise
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  let ggg = new Person({
+    name: "GGG",
+    age: 40,
+    favoriteFoods: ["Chicken", "Oatmeal", "Eggs"]
+  });
+
+  ggg.save((err,data) => {
+    err && done(err) 
+    done(null , data);
+  })
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
