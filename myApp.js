@@ -23,16 +23,17 @@ const createAndSavePerson = (done) => {
     name: "GGG",
     age: 40,
     favoriteFoods: ["Chicken", "Oatmeal", "Eggs"]
-  });
-
-  ggg.save((err,data) => {
-    err && done(err) 
-    done(null , data);
   })
+
+  ggg.save((err, data) => {
+    err ? done(err) : done(null, data)     
+  });
 };
 
-const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+ const createManyPeople =  (arrayOfPeople, done) => {
+    Person.create(arrayOfPeople, done, (err, data)=> {
+      err ? done(err) : done(null, data)
+    });  
 };
 
 const findPeopleByName = (personName, done) => {
