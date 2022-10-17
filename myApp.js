@@ -30,14 +30,18 @@ const createAndSavePerson = (done) => {
   });
 };
 
+
+// used the .create method to combine a createPerson function and the .save() functions. 
  const createManyPeople =  (arrayOfPeople, done) => {
     Person.create(arrayOfPeople, done, (err, data)=> {
       err ? done(err) : done(null, data)
     });  
 };
-
+// find doc but name key using .find() callback function is also passed to handle response for the exercise 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({name: personName}, done, (err,data) => {
+    err ? done(err) : done(null,data)
+})
 };
 
 const findOneByFood = (food, done) => {
