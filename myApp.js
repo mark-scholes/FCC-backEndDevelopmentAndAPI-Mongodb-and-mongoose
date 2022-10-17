@@ -44,6 +44,7 @@ const findPeopleByName = (personName, done) => {
 })
 };
 
+//find doc that contains a specific item in the favoriteFoods array 
 const findOneByFood = (food, done) => {
   Person.findOne({ favoriteFoods: food }, (err,data) => {
     err ? done(err) : done(null,data)
@@ -51,7 +52,9 @@ const findOneByFood = (food, done) => {
 };
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId, (err, data)=> {
+    err ? done(err) : done(null,data)
+  })
 };
 
 const findEditThenSave = (personId, done) => {
