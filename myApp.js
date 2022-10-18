@@ -80,6 +80,7 @@ async function findAndUpdate (personName, done) {
   }) 
 };
 
+// function to handle delete doc requests. This uses the findByIdAndRemove method. 
 const removeById = (personId, done) => {
   Person.findByIdAndRemove(personId, (err, data)=> {
     err ? done(err) : done(null, data)
@@ -88,8 +89,9 @@ const removeById = (personId, done) => {
 
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
-
-  done(null /*, data*/);
+  Person.remove({ name: nameToRemove}, (err, data) => {
+    err ? console.log(err) : done(null, data)
+  })
 };
 
 const queryChain = (done) => {
