@@ -51,17 +51,27 @@ const findOneByFood = (food, done) => {
   })
 };
 
+//set up the query handler for findById 
 const findPersonById = (personId, done) => {
-  Person.findById(personId, (err, data)=> {
-    err ? done(err) : done(null,data)
+  Person.findById(personId, done, (err, data)=> {
+     err ? done(err) : done(null,data)
   })
 };
 
-const findEditThenSave = (personId, done) => {
-  const foodToAdd = "hamburger";
 
-  done(null /*, data*/);
+
+async function findEditThenSave  (personId, done)  {
+  const foodToAdd = "hamburger";
+  await Person.findById(personId, (err, data) => {
+    err && console.log(err)
+    data.favoriteFoods.push(foodToAdd);
+
+    data.save((err, updatedDoc) => {
+      err ? done(err) : done(null, updatedDoc)
+    })
+  })
 };
+
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
