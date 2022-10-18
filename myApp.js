@@ -59,7 +59,7 @@ const findPersonById = (personId, done) => {
 };
 
 
-
+// created a function to handle requests to edit existing docs. This uses the previous findPersonById method to firt get the doc and then updates it once the change has been made
 async function findEditThenSave  (personId, done)  {
   const foodToAdd = "hamburger";
   await Person.findById(personId, (err, data) => {
@@ -72,11 +72,12 @@ async function findEditThenSave  (personId, done)  {
   })
 };
 
-
-const findAndUpdate = (personName, done) => {
+//function that uses the findOneAndUpdate method to update a document based on the search for a specific name to ammend the age. 
+async function findAndUpdate (personName, done) {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  await Person.findOneAndUpdate({name: personName}, {age: ageToSet}, (err, data)=> {
+    err ? done(err) : done(null, data)
+  }) 
 };
 
 const removeById = (personId, done) => {
